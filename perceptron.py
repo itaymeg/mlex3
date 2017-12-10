@@ -84,15 +84,15 @@ def run_a():
                     loss += 1
             
             acc = (float(test_data.shape[0]) - loss) / float(test_data.shape[0])
-            print 'loss ', loss, ' n ', n, ' acc ', acc
             accs.append(acc)
         acc_table[n] = np.mean(accs)
     lib.print_table(acc_table)
-def run_b():
+def run_b(save = False):
     h = perceptron(train_data, train_labels)
-    print h
-    #plt.gray()
+    #print h
     plt.imshow(h.reshape(28, 28), interpolation='nearest')
+    if save:
+        plt.savefig('2_b.jpg')
     plt.show()
 def run_c():
     h = perceptron(train_data, train_labels)
@@ -127,5 +127,5 @@ def run_d():
     plt.show()
         
 if __name__ == '__main__':
-    run_d()
+    pass
     

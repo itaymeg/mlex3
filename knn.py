@@ -90,7 +90,7 @@ def run_b(k = 10, n = 1000):
         prediction = knn(expirment_data, expirment_labels, data, k)
         if prediction != test_labels[idx]:
             loss_count += 1
-    accuracy = 100 * (len(test) - loss_count) / len(test)
+    accuracy = 100 * (float(len(test)) - float(loss_count)) / float(len(test))
     print "LOSS#{0} TEST#{1} ACC#{2}%".format(str(loss_count), len(test), accuracy)
     return accuracy
         
@@ -102,12 +102,12 @@ def run_c(save = False):
     for k in ks:
         accuracy = run_b(k=k)
         stat.append(accuracy)
-    np.save('c_stat', stat)
-    np.save('c_keys', ks)
-#    plt.plot(stat, ks, 'y')
-#    if save:
-#        plt.savefig('figure_C.jpg')
-#    plt.show()
+    plt.xlabel('n')
+    plt.ylabel('Accuracy')
+    plt.plot(ks, stat, 'y')
+    if save:
+        plt.savefig('figure_C.jpg')
+    plt.show()
     
 def run_d(save = False):
     print '[EXERCISE D] SAVE={0}'.format(save)
@@ -117,12 +117,14 @@ def run_d(save = False):
     for n in ns:
         accuracy = run_b(k=best_k, n=n)
         stat.append(accuracy)
-    np.save('d_stat', stat)
-    np.ave('d_keys', ns)
-#    plt.plot(stat, ns, 'y')
-#    if save:
-#        plt.savefig('figure_D.jpg')
-#    plt.show()
+    axes = plt.gca()
+    axes.set_xlim([100,5000])
+    plt.xlabel('n')
+    plt.ylabel('Accuracy')
+    plt.plot(ns, stat, 'b')
+    if save:
+        plt.savefig('figure_D.jpg')
+    plt.show()
 
 def main(actions = None, save = False):
     if 'b' in actions:
@@ -132,4 +134,4 @@ def main(actions = None, save = False):
     if 'd' in actions:
         run_d(save)
 if __name__ == '__main__':
-    main(actions= ['c', 'd'], save=True)
+    main(actions= ['c'], save=True)
