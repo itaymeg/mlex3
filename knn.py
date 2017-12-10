@@ -1,5 +1,6 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
+import os
 import operator
 from sklearn.datasets import fetch_mldata
 import numpy as np
@@ -17,7 +18,7 @@ train = data[idx[:10000], :].astype(int)
 train_labels = labels[idx[:10000]]
 test = data[idx[10000:], :].astype(int)
 test_labels = labels[idx[10000:]]
-
+save_folder = os.getcwd()
 
 def our_max(collection, k):
     """
@@ -101,10 +102,12 @@ def run_c(save = False):
     for k in ks:
         accuracy = run_b(k=k)
         stat.append(accuracy)
-    plt.plot(stat, ks, 'y')
-    if save:
-        plt.savefig('figure_C.jpg')
-    plt.show()
+    np.save('c_stat', stat)
+    np.save('c_keys', ks)
+#    plt.plot(stat, ks, 'y')
+#    if save:
+#        plt.savefig('figure_C.jpg')
+#    plt.show()
     
 def run_d(save = False):
     print '[EXERCISE D] SAVE={0}'.format(save)
@@ -114,10 +117,12 @@ def run_d(save = False):
     for n in ns:
         accuracy = run_b(k=best_k, n=n)
         stat.append(accuracy)
-    plt.plot(stat, ns, 'y')
-    if save:
-        plt.savefig('figure_D.jpg')
-    plt.show()
+    np.save('d_stat', stat)
+    np.ave('d_keys', ns)
+#    plt.plot(stat, ns, 'y')
+#    if save:
+#        plt.savefig('figure_D.jpg')
+#    plt.show()
 
 def main(actions = None, save = False):
     if 'b' in actions:
