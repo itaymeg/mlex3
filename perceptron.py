@@ -123,7 +123,11 @@ def run_d():
         if prediction != label:
             wrong_samples_idx.append(idx)
             loss += 1
-    plt.imshow(test_data_unscaled[wrong_samples_idx[1]].reshape(28,28))
+    plt.imshow(test_data_unscaled[wrong_samples_idx[2]].reshape(28,28))
+    plt.savefig('2_d1.jpg')  
+    plt.show()
+    plt.imshow(test_data_unscaled[wrong_samples_idx[7]].reshape(28,28))
+    plt.savefig('2_d2.jpg')  
     plt.show()
         
 if __name__ == '__main__':
